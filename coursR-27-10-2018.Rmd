@@ -179,7 +179,7 @@ Il existe plusieurs façons de créer un vecteur numérique. Nous pouvons appele
 ```{r, prompt=TRUE}
 numeric(10)
 ```
-Nous pouvons également utiliser `c() pour combiner plusieurs vecteurs afin de créer un seul vecteur. Le cas le plus simple consiste, par exemple, à associer plusieurs vecteurs à un seul élément pour former un vecteur à plusieurs éléments:
+Nous pouvons également utiliser `c()` pour combiner plusieurs vecteurs afin de créer un seul vecteur. Le cas le plus simple consiste, par exemple, à associer plusieurs vecteurs à un seul élément pour former un vecteur à plusieurs éléments:
 ```{r, prompt=TRUE}
 c(1, 2, 3, 4, 5)
 ```
@@ -187,13 +187,11 @@ Nous pouvons également combiner un mélange de vecteurs à un élément et à p
 ```{r, prompt=TRUE}
 c(1, 2, c(3, 4, 5))
 ```
-Pour créer une série d'entiers consécutifs, l'opérateur `: fera facilement l'affaire.
+Pour créer une série d'entiers consécutifs, l'opérateur `:` fera facilement l'affaire.
 ```{r, prompt=TRUE}
 1:5
 ```
-Justement, le code précédent produit un vecteur entier au lieu d’un vecteur numérique. Dans de nombreux cas, leur différence n’est pas si importante.
-
-Une méthode plus générale pour produire une séquence numérique est `seq()`. Par exemple, le code suivant produit un vecteur numérique d'une séquence de `1` à `10` par incrément de `2:
+Une méthode plus générale pour produire une séquence numérique est `seq()`. Par exemple, le code suivant produit un vecteur numérique d'une séquence de `1` à `10` par incrément de `2`:
 ```{r, prompt=TRUE}
 seq(1, 10, 2)
 ```
@@ -203,13 +201,13 @@ Par exemple, nous pouvons créer un autre vecteur numérique qui commence par `3
 ```{r, prompt=TRUE}
 seq(3, length.out = 10)
 ```
-Un appel de fonction comme ci-dessus utilise un argument nommé `length.out afin que les autres arguments soient conservés par défaut et que seul cet argument soit modifié.
+Un appel de fonction comme ci-dessus utilise un argument nommé `length.out` afin que les autres arguments soient conservés par défaut et que seul cet argument soit modifié.
 
-Il existe plusieurs façons de définir des vecteurs numériques, mais nous devons toujours faire attention lorsque nous utilisons `:, un exemple:
+Il existe plusieurs façons de définir des vecteurs numériques, mais nous devons toujours faire attention lorsque nous utilisons `:`, un exemple:
 ```{r, prompt=TRUE}
 1 + 1:5
 ```
-Comme le résultat le montre, `1 + 1:5` ne signifie pas une séquence de `2` à `5`, mais de `2` à `6`. C'est parce que`:` a une priorité supérieure à `+`, ce qui conduit à évaluer d'abord `1:5` et à ajouter `1` à chaque entrée, ce qui donne la séquence que vous voyez dans le résultat.
+Comme le résultat le montre, `1 + 1:5` ne signifie pas une séquence de `2` à `5`, mais de `2` à `6`. C'est parce que `:` a une priorité supérieure à `+`, ce qui conduit à évaluer d'abord `1:5` et à ajouter `1` à chaque entrée, ce qui donne la séquence que vous voyez dans le résultat.
 
 ### Vecteur logique
 Contrairement aux vecteurs numériques, un vecteur logique stocke un groupe de valeurs `TRUE` ou `FALSE`. Ils sont fondamentalement oui ou non pour désigner les réponses à un groupe de questions logiques.
@@ -222,7 +220,7 @@ Un moyen plus habituel d'obtenir un vecteur logique consiste à poser des questi
 ```{r, prompt=TRUE}
 1 > 2
 ```
-La réponse est oui, représentée par `TRUE`. Parfois, il est verbeux d'écrire `TRUE` et `FALSE`; nous pouvons donc utiliser `T` comme abréviation de `TRUE` et `F` pour `FALSE`. Si nous voulons effectuer plusieurs comparaisons en même temps, nous pouvons directement utiliser des vecteurs numériques dans la question:
+La réponse est non, représentée par `FALSE`. Parfois, il est verbeux d'écrire `TRUE` et `FALSE`; nous pouvons donc utiliser `T` comme abréviation de `TRUE` et `F` pour `FALSE`. Si nous voulons effectuer plusieurs comparaisons en même temps, nous pouvons directement utiliser des vecteurs numériques dans la question:
 ```{r, prompt=TRUE}
 c(1, 2) > 2
 ```
@@ -238,7 +236,7 @@ c(2, 3) > c(1, 2, -1, 3)
 ```
 Le mécanisme informatique **recycle** le vecteur le plus court et fonctionne comme `c(2 > 1, 3 > 2, 2 > -1, 3 > 3)`. Plus spécifiquement, le vecteur le plus court sera **recyclé** pour terminer toutes les comparaisons de chaque élément du vecteur le plus long.
 
-Dans **R**, plusieurs opérateurs logiques binaires sont définies, tels que `==` pour indiquer l'égalité, `>` pour supérieur à, `>=` pour supérieur ou égal à, `<`pour inférieur et `<=` pour inférieur ou égal à. De plus, **R** fournit d'autres opérateurs logiques supplémentaires tels que `%in% pour indiquer si chaque élément du vecteur de gauche est contenu par le vecteur de droite:
+Dans **R**, plusieurs opérateurs logiques binaires sont définies, tels que `==` pour indiquer l'égalité, `>` pour supérieur à, `>=` pour supérieur ou égal à, `<` pour inférieur et `<=` pour inférieur ou égal à. De plus, **R** fournit d'autres opérateurs logiques supplémentaires tels que `%in%` pour indiquer si chaque élément du vecteur de gauche est contenu par le vecteur de droite:
 ```{r, prompt=TRUE}
  1 %in% c(1, 2, 3)
 c(1, 4) %in% c(1, 2, 3)
@@ -246,34 +244,34 @@ c(1, 4) %in% c(1, 2, 3)
 On remarque que tous les opérateurs d'égalité effectuent le recyclage, mais que `%in%` ne le fait pas. Au lieu de cela, cela fonctionne toujours en itérant sur le vecteur à gauche et fonctionne comme `c(1 %in% c(1, 2, 3), 4 %in% c(1, 2, 3))` dans l'exemple précédent.
 
 ### Vecteur de caractère
-Un vecteur de caractère est un groupe de chaînes de caractères. Ici, un caractère ne signifie pas littéralement une lettre ou un symbole dans une langue, mais une chaîne comme `elle-ci est une chaîne. Les guillemets doubles et les guillemets simples peuvent être utilisés pour créer un vecteur de caractère, comme suit:
+Un vecteur de caractère est un groupe de chaînes de caractères. Ici, un caractère ne signifie pas littéralement une lettre ou un symbole dans une langue, mais une chaîne comme `elle-ci est une chaîne`. Les guillemets doubles et les guillemets simples peuvent être utilisés pour créer un vecteur de caractère, comme suit:
 ```{r, prompt=TRUE}
 "hello, world!"
 'hello, world!'
 ```
-Nous pouvons également utiliser la fonction de combinaison `c() pour construire un vecteur de caractères multi-éléments:
+Nous pouvons également utiliser la fonction de combinaison `c()` pour construire un vecteur de caractères multi-éléments:
 ```{r, prompt=TRUE}
 c("Hello", "World")
 ```
-Nous pouvons utiliser `== pour dire si deux vecteurs ont des valeurs égales dans les positions correspondantes; cela s'applique aussi aux vecteurs de caractères:
+Nous pouvons utiliser `==` pour dire si deux vecteurs ont des valeurs égales dans les positions correspondantes; cela s'applique aussi aux vecteurs de caractères:
 ```{r, prompt=TRUE}
 c("Hello", "World") == c('Hello', 'World')
 ```
-Les vecteurs de caractères sont égaux, car `"`et `' fonctionnent ensemble pour créer une chaîne et n'affectent pas sa valeur:
+Les vecteurs de caractères sont égaux, car `"` et `'` fonctionnent ensemble pour créer une chaîne et n'affectent pas sa valeur:
 ```{r, prompt=TRUE}
 c("Hello", "World") == "Hello, World"
 ```
-L'expression précédente donne `FALSE car ni `Hello` ni `World` ne valent `Hello, World`. La seule différence entre les deux guillemets est le comportement lorsque vous créez une chaîne contenant des guillemets.
+L'expression précédente donne `FALSE` car ni `Hello` ni `World` ne valent `Hello, World`. La seule différence entre les deux guillemets est le comportement lorsque vous créez une chaîne contenant des guillemets.
 
 Si vous utilisez `"` pour créer une chaîne (un vecteur de caractères à un seul élément) contenant `"` lui-même, vous devez taper `\"` pour échapper `"` dans la chaîne pour empêcher l'interpréteur de considérer `"` dans la chaîne comme le guillemet de la chaîne.
 
 Les exemples suivants illustrent l'échappement des guillemets. Le code utilise `cat()` pour imprimer le texte donné:
 ```{r, prompt=TRUE, error=TRUE}
-cat ("Is \"You\" a Chinese name?")
+cat("Bonjour \"Salah\" comment tu vas?")
 ```
 Si vous pensez que ce n'est pas facile à lire, vous pouvez utiliser `'` pour créer la chaîne, ce qui peut être plus facile:
 ```{r, prompt=TRUE, error=TRUE}
-cat('Is "You" a Chinese name?')
+cat('Bonjour "Salah" comment tu vas??')
 ```
 
 En d'autres termes, `"` permet `"` dans la chaîne sans échapper et `"` permet `"` dans la chaîne sans échapper.
