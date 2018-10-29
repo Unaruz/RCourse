@@ -291,5 +291,113 @@ v1 <- c(1, 2, 3, 4)
 ```
 Chacune des lignes suivantes obtient un sous-ensemble spécifique de `v1`. Par exemple, nous pouvons obtenir le deuxième élément:
 
+```{r, prompt=TRUE, error=TRUE}
+v1[2]
+```
+Nous pouvons obtenir les deuxième à quatrième éléments:
+```{r, prompt=TRUE, error=TRUE}
+v1[2:4]
+```
+Nous pouvons obtenir tous les éléments sauf le troisième:
+```{r, prompt=TRUE, error=TRUE}
+v1[-3]
+```
+Les modèles sont clairs: nous pouvons placer n’importe quel vecteur numérique entre les crochets après le vecteur pour extraire un sous-ensemble correspondant:
+```{r, prompt=TRUE, error=TRUE}
+a <- c(1, 3)
+v1[a]
+```
+Tous les exemples précédents effectuent des sous-ensembles par position, c'est-à-dire que nous obtenons un sous-ensemble d'un vecteur en spécifiant les positions des éléments. L'utilisation de nombres négatifs exclura ces éléments. Une chose à noter est que vous ne pouvez pas utiliser des nombres positifs et des nombres négatifs ensemble:
+```{r, prompt=TRUE, error=TRUE}
+v1[c(1, 2, -3)]
+```
 
+Que se passe-t-il si nous subdivisons le vecteur en utilisant des positions situées au-delà de la plage du vecteur? L'exemple suivant tente d'obtenir un sous-ensemble de v1 du troisième élément au sixième élément non existant:
+```{r, prompt=TRUE, error=TRUE}
+v1[3: 6]
+```
+Comme on peut le constater, les positions non existantes se retrouvent avec les valeurs manquantes représentées par NA. Dans les données du monde réel, les valeurs manquantes sont courantes. La bonne partie est que tous les calculs arithmétiques avec NA aboutissent également à NA pour la cohérence. 
+D'autre part, toutefois, le traitement des données nécessite un effort supplémentaire, car il peut être dangereux de supposer que les données ne contiennent aucune valeur manquante.
 
+Un autre moyen de créer un vecteur consiste à utiliser des vecteurs logiques. Nous pouvons fournir un vecteur logique de longueur égale pour déterminer si chaque entrée doit être extraite:
+
+```{r, prompt=TRUE, error=TRUE}
+v1[c(TRUE, FALSE, TRUE, FALSE)]
+```
+Plus qu'un sous-ensemble, nous pouvons écraser un sous-ensemble spécifique d'un vecteur comme ceci:
+```{r, prompt=TRUE, error=TRUE}
+v1[2] <- 0
+```
+Dans ce cas, `v1` devient le suivant:
+```{r, prompt=TRUE, error=TRUE}
+v1
+```
+
+Nous pouvons également écraser plusieurs éléments à différentes positions en même temps:
+```{r, prompt=TRUE, error=TRUE}
+v1[2: 4] <- c(0, 1, 3)
+```
+Maintenant, `v1` devient le suivant:
+```{r, prompt=TRUE, error=TRUE}
+v1
+```
+
+Comme les sous-ensembles, les sélecteurs logiques sont également acceptés pour la réécriture:
+```{r, prompt=TRUE, error=TRUE}
+v1[c(TRUE, FALSE, TRUE, FALSE)] <- c(3, 2) 
+```
+Comme vous pouvez vous en douter, `v1` devient le suivant:
+```{r, prompt=TRUE, error=TRUE}
+v1
+```
+
+Une implication utile de cette opération est la sélection d'entrées par critère logique. Par exemple, le code suivant sélectionne tous les éléments qui ne sont pas supérieurs à `2` dans `v1`:
+```{r, prompt=TRUE, error=TRUE}
+v1[v1 <= 2]
+```
+Un critère de sélection plus complexe fonctionne également. L'exemple suivant sélectionne tous les éléments de `v1` qui satisfont `x^2 - x + 1 > 0`:
+```{r, prompt=TRUE, error=TRUE}
+v1[v1 ^ 2 - v1 + 1 >= 0]
+```
+Pour remplacer toutes les entrées qui satisfont `x <= 2` par `0`, nous pouvons appeler:
+```{r, prompt=TRUE, error=TRUE}
+v1[v1 <= 2] <- 0
+```
+Comme vous vous en doutez, v1 devient le suivant:
+```{r, prompt=TRUE, error=TRUE}
+v1
+```
+
+Si nous écrasons le vecteur sur une entrée inexistante, le vecteur se développera automatiquement avec la valeur non attribuée étant NA comme valeurs manquantes:
+```{r, prompt=TRUE, error=TRUE}
+v1[10] <- 8
+v1
+```
+# Chapitre 2: Importation-exportation et production de données
+
+## Importer des données
+
+### Importer les données depuis un fichier texte ASCII
+Il existe trois fonctions **R** principales à utiliser pour importer des données depuis un fichier texte:
+* `read.table()`:  pour des jeux de données organisés sous la forme de tableaux, comme cela est souvent le cas en statistique.
+* `read.ftable()`: pour lire des tableaux de contingence.
+* `scan()`: beaucoup plus flexible et puissante à utiliser dans tous les autres cas.
+
+#### Lecture de données avec `read.table()`
+L'instruction **R** suivante va lire les données presentes dans un fichier (à sélectionner dans une fenetre de dialogue) et les rapatrier dans **R** sous la forme d'un `data.frame` que nous avons choisi de nommer `donnees`.
+
+`donnees <- read.table(file=file.choose(),header=T,sep="\t", dec=".",row.names=l)`
+
+Les paramètres principaux de `read.table()`
+
+#### Lecture de données avec `read.ftable()`
+#### Lecture de données avec la fonction `scan()`
+
+### Importer des données depuis Excel au le tableur d'Open Office
+#### Utiliser le copier-coller
+#### Passer par un fichier ASCII intermédiaire
+#### Utiliser des packages spécifiques
+
+### Importer des données depuis SPSS, Minitab, SAS ou Matlab
+
+### Les gros fichiers de données
